@@ -3,6 +3,7 @@ import type { NextRequest } from "next/server";
 
 import { forwardToUpstream, type ForwardResult } from "@/lib/api/proxy";
 import { fetchOrgToken } from "@/lib/api/upstream-profile";
+import { validateUpstreamRequest } from "@/lib/api/validate-upstream";
 import { refreshSession } from "@/lib/auth/refresh";
 import {
   applySession,
@@ -98,6 +99,17 @@ async function handle(
     request.method !== "GET" && request.method !== "HEAD"
       ? Buffer.from(await request.arrayBuffer())
       : undefined;
+
+  // Validate known mutating request bodies server-side before any upstream
+  // call (defense even if the client form validation is bypassed).
+  const validation = validateUpstreamRequest(request.method, path, requestBody);
+
+  if (!validation.ok) {
+    return NextResponse.json(
+      { error: "invalid_request", issues: validation.issues },
+      { status: 400 },
+    );
+  }
 
   const forward = (current: SessionData) =>
     forwardToUpstream(
