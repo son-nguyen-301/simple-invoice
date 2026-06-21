@@ -50,6 +50,7 @@ export const createInvoiceSchema = z
     email: requiredText("Email is required").pipe(
       z.email("Enter a valid email address"),
     ),
+    mobile: requiredText("Mobile number is required"),
     itemName: requiredText("Item name is required"),
     itemReference: requiredText("Item reference is required"),
     quantity: z

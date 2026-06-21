@@ -90,6 +90,7 @@ describe("buildCreateInvoicePayload", () => {
       firstName: "A",
       lastName: "B",
       email: "a@b.com",
+      mobile: "+6597594971",
       itemName: "Item",
       quantity: "1",
       rate: "10",
@@ -112,6 +113,7 @@ describe("computeErrors", () => {
     expect(errors.dueDate).toBe("Due date is required");
     expect(errors.firstName).toBe("First name is required");
     expect(errors.email).toBe("Email is required");
+    expect(errors.mobile).toBe("Mobile number is required");
     expect(errors.itemName).toBe("Item name is required");
     expect(errors.itemReference).toBe("Item reference is required");
     expect(errors.rate).toBe("Enter a valid rate");

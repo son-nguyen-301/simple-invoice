@@ -68,13 +68,19 @@ export function CustomerSection({
           />
         </Field>
 
-        <Field htmlFor="mobile" label="Mobile number">
+        <Field
+          htmlFor="mobile"
+          label="Mobile number"
+          required
+          error={errors.mobile}
+        >
           <Input
             id="mobile"
             value={form.mobile}
             onChange={onField("mobile")}
             placeholder="+6597594971"
             className={INPUT}
+            aria-invalid={Boolean(errors.mobile)}
           />
         </Field>
       </div>

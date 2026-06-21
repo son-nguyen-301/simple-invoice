@@ -15,6 +15,7 @@ async function fillRequiredFields(page: import("@playwright/test").Page) {
   await page.getByLabel(/First name/).fill("Nguyen");
   await page.getByLabel(/Last name/).fill("Dung");
   await page.getByLabel(/Email/).fill("nguyen@example.com");
+  await page.getByLabel(/Mobile/).fill("+6597594971");
   await page.getByLabel(/Item name/).fill("Honda Motor");
   await page.getByLabel(/Item reference/).fill("itemRef");
   await page.getByLabel(/Quantity/).fill("2");

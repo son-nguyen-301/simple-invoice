@@ -35,7 +35,7 @@ const customerSchema = z.object({
   lastName: requiredText("Last name is required"),
   contact: z.object({
     email: z.email("Enter a valid email address"),
-    mobileNumber: z.string().optional(),
+    mobileNumber: requiredText("Mobile number is required"),
   }),
   addresses: z.array(addressSchema).optional(),
 });
