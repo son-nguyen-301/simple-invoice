@@ -5,7 +5,10 @@ import { Button } from "@/components/ui/button";
 
 export function ListEmpty({ onClearFilters }: { onClearFilters: () => void }) {
   return (
-    <div className="flex flex-col items-center gap-5 px-6 py-[72px] text-center">
+    <div
+      data-testid="list-empty"
+      className="flex flex-col items-center gap-5 px-6 py-[72px] text-center"
+    >
       <div className="bg-accent flex size-16 items-center justify-center rounded-2xl">
         <Search className="text-primary size-7" />
       </div>
@@ -19,11 +22,17 @@ export function ListEmpty({ onClearFilters }: { onClearFilters: () => void }) {
         </p>
       </div>
       <div className="flex gap-2.5">
-        <Button variant="outline" onClick={onClearFilters}>
+        <Button
+          variant="outline"
+          data-testid="list-empty-clear-filters"
+          onClick={onClearFilters}
+        >
           Clear filters
         </Button>
         <Button asChild>
-          <Link href="/create">Create invoice</Link>
+          <Link href="/create" data-testid="list-empty-create-invoice">
+            Create invoice
+          </Link>
         </Button>
       </div>
     </div>

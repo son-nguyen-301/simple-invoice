@@ -31,7 +31,10 @@ export function InvoiceTable({ rows }: { rows: InvoiceRow[] }) {
       <TableBody>
         {rows.map((row) => (
           <TableRow key={row.id} className="hover:bg-muted/60">
-            <TableCell className="text-primary font-mono text-[13.5px] font-semibold tabular-nums">
+            <TableCell
+              data-testid={`invoice-row-${row.number}`}
+              className="text-primary font-mono text-[13.5px] font-semibold tabular-nums"
+            >
               {row.number}
             </TableCell>
             <TableCell>

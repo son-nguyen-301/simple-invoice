@@ -19,7 +19,10 @@ export default function LoginPage() {
             </div>
           </div>
 
-          <h1 className="text-ink text-[27px] font-extrabold tracking-tight">
+          <h1
+            data-testid="login-page-heading"
+            className="text-ink text-[27px] font-extrabold tracking-tight"
+          >
             Sign in
           </h1>
           <p className="text-muted-foreground mt-2 mb-7 text-[15px]">

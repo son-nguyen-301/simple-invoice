@@ -24,10 +24,16 @@ export function TaxDiscountSection({
   return (
     <SectionCard step={5} title="Tax & discount">
       <div className="grid grid-cols-1 gap-4 min-[881px]:grid-cols-2">
-        <Field htmlFor="taxRate" label="Tax (added)" error={errors.taxRate}>
+        <Field
+          htmlFor="taxRate"
+          label="Tax (added)"
+          error={errors.taxRate}
+          errorTestId="tax-discount-section-tax-rate-error"
+        >
           <div className="relative">
             <Input
               id="taxRate"
+              data-testid="tax-discount-section-tax-rate"
               type="number"
               min={0}
               max={100}
@@ -48,6 +54,7 @@ export function TaxDiscountSection({
           htmlFor="discountValue"
           label="Discount (deducted)"
           error={errors.discountValue}
+          errorTestId="tax-discount-section-discount-value-error"
         >
           <div className="relative">
             <span className="text-muted-foreground absolute top-1/2 left-3.5 -translate-y-1/2 text-sm font-semibold">
@@ -55,6 +62,7 @@ export function TaxDiscountSection({
             </span>
             <Input
               id="discountValue"
+              data-testid="tax-discount-section-discount-value"
               type="number"
               min={0}
               step="any"

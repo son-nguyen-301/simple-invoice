@@ -37,6 +37,7 @@ export function CountrySelect({
       <PopoverTrigger asChild>
         <Button
           id={id}
+          data-testid="country-select-trigger"
           type="button"
           variant="outline"
           role="combobox"
@@ -56,13 +57,17 @@ export function CountrySelect({
         className="w-[var(--radix-popover-trigger-width)] p-0"
       >
         <Command>
-          <CommandInput placeholder="Search country or code..." />
+          <CommandInput
+            data-testid="country-select-search"
+            placeholder="Search country or code..."
+          />
           <CommandList>
             <CommandEmpty>No country found.</CommandEmpty>
             <CommandGroup>
               {COUNTRIES.map((country) => (
                 <CommandItem
                   key={country.code}
+                  data-testid={`country-select-option-${country.code}`}
                   value={`${country.name} ${country.code}`}
                   onSelect={() => {
                     onChange(country.code);

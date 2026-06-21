@@ -22,6 +22,7 @@ export function BankAccountSection({
         <Field htmlFor="accountName" label="Account name">
           <Input
             id="accountName"
+            data-testid="bank-account-section-account-name"
             value={form.accountName}
             onChange={onField("accountName")}
             placeholder="John Terry"
@@ -32,6 +33,7 @@ export function BankAccountSection({
         <Field htmlFor="accountNumber" label="Account number">
           <Input
             id="accountNumber"
+            data-testid="bank-account-section-account-number"
             value={form.accountNumber}
             onChange={onField("accountNumber")}
             placeholder="12345678"
@@ -42,6 +44,7 @@ export function BankAccountSection({
         <Field htmlFor="sortCode" label="Sort code">
           <Input
             id="sortCode"
+            data-testid="bank-account-section-sort-code"
             value={form.sortCode}
             onChange={onField("sortCode")}
             placeholder="09-01-01"

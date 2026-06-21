@@ -12,7 +12,10 @@ export function InvoiceCardList({ rows }: { rows: InvoiceRow[] }) {
         <Card key={row.id} className="rounded-xl">
           <CardContent className="p-4">
             <div className="mb-3 flex items-center justify-between">
-              <span className="text-primary font-mono text-[13px] font-semibold tabular-nums">
+              <span
+                data-testid={`invoice-row-${row.number}`}
+                className="text-primary font-mono text-[13px] font-semibold tabular-nums"
+              >
                 {row.number}
               </span>
               <StatusPill status={row.status} />

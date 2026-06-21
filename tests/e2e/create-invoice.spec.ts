@@ -9,17 +9,21 @@ test.beforeEach(async ({ context }) => {
 });
 
 async function fillRequiredFields(page: import("@playwright/test").Page) {
-  await page.getByLabel(/Invoice number/).fill("INV0001");
-  await page.getByLabel(/Invoice date/).fill("2026-06-21");
-  await page.getByLabel(/Due date/).fill("2026-06-28");
-  await page.getByLabel(/First name/).fill("Nguyen");
-  await page.getByLabel(/Last name/).fill("Dung");
-  await page.getByLabel(/Email/).fill("nguyen@example.com");
-  await page.getByLabel(/Mobile/).fill("+6597594971");
-  await page.getByLabel(/Item name/).fill("Honda Motor");
-  await page.getByLabel(/Item reference/).fill("itemRef");
-  await page.getByLabel(/Quantity/).fill("2");
-  await page.getByLabel(/Rate/).fill("1000");
+  await page
+    .getByTestId("invoice-details-section-invoice-number")
+    .fill("INV0001");
+  await page
+    .getByTestId("invoice-details-section-invoice-date")
+    .fill("2026-06-21");
+  await page.getByTestId("invoice-details-section-due-date").fill("2026-06-28");
+  await page.getByTestId("customer-section-first-name").fill("Nguyen");
+  await page.getByTestId("customer-section-last-name").fill("Dung");
+  await page.getByTestId("customer-section-email").fill("nguyen@example.com");
+  await page.getByTestId("customer-section-mobile").fill("+6597594971");
+  await page.getByTestId("line-item-section-item-name").fill("Honda Motor");
+  await page.getByTestId("line-item-section-item-reference").fill("itemRef");
+  await page.getByTestId("line-item-section-quantity").fill("2");
+  await page.getByTestId("line-item-section-rate").fill("1000");
 }
 
 test("creates an invoice and shows the success confirmation", async ({
@@ -58,13 +62,15 @@ test("creates an invoice and shows the success confirmation", async ({
 
   // Country is a filterable combobox of ISO2 codes (the API rejects free-text
   // country names); search by code, then pick the option.
-  await page.getByLabel("Country", { exact: true }).click();
-  await page.getByPlaceholder(/Search country/).fill("VN");
-  await page.getByRole("option", { name: "Vietnam (VN)" }).click();
+  await page.getByTestId("country-select-trigger").click();
+  await page.getByTestId("country-select-search").fill("VN");
+  await page.getByTestId("country-select-option-VN").click();
 
-  await page.getByRole("button", { name: /create invoice/i }).click();
+  await page.getByTestId("invoice-summary-submit").click();
 
-  await expect(page.getByText("Invoice created")).toBeVisible();
+  await expect(
+    page.getByTestId("use-create-invoice-success-toast"),
+  ).toBeVisible();
   await expect(page).toHaveURL((url) => url.pathname === "/");
 
   const body = captured!.body;
@@ -90,9 +96,13 @@ test("blocks submission and shows errors when required fields are empty", async 
   });
 
   await page.goto("/create");
-  await page.getByRole("button", { name: /create invoice/i }).click();
+  await page.getByTestId("invoice-summary-submit").click();
 
-  await expect(page.getByText("Invoice number is required")).toBeVisible();
-  await expect(page.getByText("Item name is required")).toBeVisible();
+  await expect(
+    page.getByTestId("invoice-details-section-invoice-number-error"),
+  ).toBeVisible();
+  await expect(
+    page.getByTestId("line-item-section-item-name-error"),
+  ).toBeVisible();
   expect(posted).toBe(false);
 });

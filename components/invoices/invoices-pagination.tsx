@@ -38,6 +38,7 @@ export function InvoicesPagination({
         <button
           type="button"
           aria-label="Previous page"
+          data-testid="invoices-pagination-prev"
           className={cn(navButton, "border-input bg-card")}
           disabled={pageNum <= 1}
           onClick={() => onPageChange(pageNum - 1)}
@@ -48,6 +49,7 @@ export function InvoicesPagination({
           <button
             key={page}
             type="button"
+            data-testid={`invoices-pagination-page-${page}`}
             className={cn(
               navButton,
               page === pageNum
@@ -62,6 +64,7 @@ export function InvoicesPagination({
         <button
           type="button"
           aria-label="Next page"
+          data-testid="invoices-pagination-next"
           className={cn(navButton, "border-input bg-card")}
           disabled={pageNum >= pageCount}
           onClick={() => onPageChange(pageNum + 1)}

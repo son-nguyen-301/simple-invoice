@@ -43,9 +43,11 @@ export function LineItemSection({
           label="Item name"
           required
           error={errors.itemName}
+          errorTestId="line-item-section-item-name-error"
         >
           <Input
             id="itemName"
+            data-testid="line-item-section-item-name"
             value={form.itemName}
             onChange={onField("itemName")}
             placeholder="Honda Motor"
@@ -59,9 +61,11 @@ export function LineItemSection({
           label="Item reference"
           required
           error={errors.itemReference}
+          errorTestId="line-item-section-item-reference-error"
         >
           <Input
             id="itemReference"
+            data-testid="line-item-section-item-reference"
             value={form.itemReference}
             onChange={onField("itemReference")}
             placeholder="itemRef"
@@ -75,6 +79,7 @@ export function LineItemSection({
         <Field htmlFor="itemDescription" label="Item description">
           <Input
             id="itemDescription"
+            data-testid="line-item-section-item-description"
             value={form.itemDescription}
             onChange={onField("itemDescription")}
             placeholder="Honda RC150"
@@ -89,9 +94,11 @@ export function LineItemSection({
           label="Quantity"
           required
           error={errors.quantity}
+          errorTestId="line-item-section-quantity-error"
         >
           <Input
             id="quantity"
+            data-testid="line-item-section-quantity"
             type="number"
             value={form.quantity}
             onChange={onField("quantity")}
@@ -101,13 +108,20 @@ export function LineItemSection({
           />
         </Field>
 
-        <Field htmlFor="rate" label="Rate" required error={errors.rate}>
+        <Field
+          htmlFor="rate"
+          label="Rate"
+          required
+          error={errors.rate}
+          errorTestId="line-item-section-rate-error"
+        >
           <div className="relative">
             <span className="text-muted-foreground absolute top-1/2 left-3.5 -translate-y-1/2 text-sm font-semibold">
               {symbol}
             </span>
             <Input
               id="rate"
+              data-testid="line-item-section-rate"
               type="number"
               value={form.rate}
               onChange={onField("rate")}
@@ -121,6 +135,7 @@ export function LineItemSection({
         <Field htmlFor="itemUOM" label="Unit of measure">
           <Input
             id="itemUOM"
+            data-testid="line-item-section-item-uom"
             value={form.itemUOM}
             onChange={onField("itemUOM")}
             placeholder="KG"
@@ -131,6 +146,7 @@ export function LineItemSection({
         <Field htmlFor="lineTotal" label="Line total">
           <div
             id="lineTotal"
+            data-testid="line-item-section-line-total"
             className="border-input bg-muted text-foreground flex h-11 items-center rounded-lg border px-3.5 font-mono text-sm font-bold"
           >
             {formatMoney(totals.subtotal, form.currency)}

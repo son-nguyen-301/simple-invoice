@@ -10,14 +10,12 @@ const { push, refresh } = vi.hoisted(() => ({
 
 vi.mock("next/navigation", () => ({ useRouter: () => ({ push, refresh }) }));
 
-function fill(label: RegExp, value: string) {
-  fireEvent.change(screen.getByLabelText(label), { target: { value } });
+function fill(testId: string, value: string) {
+  fireEvent.change(screen.getByTestId(testId), { target: { value } });
 }
 
 function submit() {
-  fireEvent.submit(
-    screen.getByRole("button", { name: /sign in/i }).closest("form")!,
-  );
+  fireEvent.submit(screen.getByTestId("login-form-submit").closest("form")!);
 }
 
 beforeEach(() => {
@@ -35,8 +33,12 @@ describe("LoginForm", () => {
     vi.stubGlobal("fetch", fetchMock);
     render(<LoginForm />);
     submit();
-    expect(screen.getByText("Username is required")).toBeInTheDocument();
-    expect(screen.getByText("Password is required")).toBeInTheDocument();
+    expect(screen.getByTestId("login-form-username-error")).toHaveTextContent(
+      "Username is required",
+    );
+    expect(screen.getByTestId("login-form-password-error")).toHaveTextContent(
+      "Password is required",
+    );
     expect(fetchMock).not.toHaveBeenCalled();
   });
 
@@ -45,8 +47,8 @@ describe("LoginForm", () => {
 
     vi.stubGlobal("fetch", fetchMock);
     render(<LoginForm />);
-    fill(/username/i, "94756921275");
-    fill(/password/i, "Password@12345");
+    fill("login-form-username", "94756921275");
+    fill("login-form-password", "Password@12345");
     submit();
     await waitFor(() => expect(push).toHaveBeenCalledWith("/"));
     const [url, init] = fetchMock.mock.calls[0];
@@ -66,12 +68,12 @@ describe("LoginForm", () => {
       vi.fn().mockResolvedValue({ ok: false, status: 401 }),
     );
     render(<LoginForm />);
-    fill(/username/i, "u");
-    fill(/password/i, "bad");
+    fill("login-form-username", "u");
+    fill("login-form-password", "bad");
     submit();
-    expect(
-      await screen.findByText("Invalid username or password."),
-    ).toBeInTheDocument();
+    expect(await screen.findByTestId("login-form-error")).toHaveTextContent(
+      "Invalid username or password.",
+    );
     expect(push).not.toHaveBeenCalled();
   });
 
@@ -81,23 +83,23 @@ describe("LoginForm", () => {
       vi.fn().mockResolvedValue({ ok: false, status: 500 }),
     );
     render(<LoginForm />);
-    fill(/username/i, "u");
-    fill(/password/i, "p");
+    fill("login-form-username", "u");
+    fill("login-form-password", "p");
     submit();
-    expect(
-      await screen.findByText("Something went wrong. Please try again."),
-    ).toBeInTheDocument();
+    expect(await screen.findByTestId("login-form-error")).toHaveTextContent(
+      "Something went wrong. Please try again.",
+    );
   });
 
   it("shows a generic error when the request throws", async () => {
     vi.stubGlobal("fetch", vi.fn().mockRejectedValue(new Error("network")));
     render(<LoginForm />);
-    fill(/username/i, "u");
-    fill(/password/i, "p");
+    fill("login-form-username", "u");
+    fill("login-form-password", "p");
     submit();
-    expect(
-      await screen.findByText("Something went wrong. Please try again."),
-    ).toBeInTheDocument();
+    expect(await screen.findByTestId("login-form-error")).toHaveTextContent(
+      "Something went wrong. Please try again.",
+    );
   });
 
   it("disables the button and shows a loading label while submitting", async () => {
@@ -112,11 +114,13 @@ describe("LoginForm", () => {
       ),
     );
     render(<LoginForm />);
-    fill(/username/i, "u");
-    fill(/password/i, "p");
+    fill("login-form-username", "u");
+    fill("login-form-password", "p");
     submit();
-    expect(await screen.findByText("Signing in...")).toBeInTheDocument();
-    expect(screen.getByRole("button")).toBeDisabled();
+    expect(await screen.findByTestId("login-form-submit")).toHaveTextContent(
+      "Signing in...",
+    );
+    expect(screen.getByTestId("login-form-submit")).toBeDisabled();
     resolve({ ok: true, status: 200 });
     // Wait for async operations to settle so no pending state update leaks into later tests
     await waitFor(() => expect(push).toHaveBeenCalledWith("/"));
@@ -131,14 +135,14 @@ describe("LoginForm", () => {
 
     render(<LoginForm />);
 
-    fireEvent.change(screen.getByLabelText(/username/i), {
+    fireEvent.change(screen.getByTestId("login-form-username"), {
       target: { value: "94756921275" },
     });
-    fireEvent.change(screen.getByLabelText(/password/i), {
+    fireEvent.change(screen.getByTestId("login-form-password"), {
       target: { value: "secret" },
     });
-    fireEvent.click(screen.getByLabelText(/remember me/i));
-    fireEvent.click(screen.getByRole("button", { name: /sign in/i }));
+    fireEvent.click(screen.getByTestId("login-form-remember"));
+    fireEvent.click(screen.getByTestId("login-form-submit"));
 
     await waitFor(() => expect(fetchMock).toHaveBeenCalled());
 

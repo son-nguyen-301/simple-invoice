@@ -74,6 +74,7 @@ export function InvoiceSummary({
 
       <Button
         type="submit"
+        data-testid="invoice-summary-submit"
         disabled={pending}
         className="bg-primary hover:bg-primary-hover h-[50px] w-full rounded-xl text-[15.5px] font-bold text-white"
       >
@@ -93,6 +94,7 @@ export function InvoiceSummary({
       <Button
         type="button"
         variant="outline"
+        data-testid="invoice-summary-cancel"
         onClick={onCancel}
         className="h-[46px] w-full rounded-xl text-[14.5px] font-bold"
       >

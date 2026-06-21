@@ -16,9 +16,9 @@ test("renders invoices from the proxied response", async ({ page }) => {
 
   await page.goto("/");
 
-  await expect(page.getByRole("heading", { name: "Invoices" })).toBeVisible();
+  await expect(page.getByTestId("invoice-list-heading")).toBeVisible();
   await expect(
-    page.locator("text=INV1001").filter({ visible: true }).first(),
+    page.getByTestId("invoice-row-INV1001").filter({ visible: true }).first(),
   ).toBeVisible();
 });
 
@@ -29,8 +29,8 @@ test("shows the empty state and clears filters", async ({ page }) => {
 
   await page.goto("/?status=Paid&keyword=zzz");
 
-  await expect(page.getByText(/no invoices found/i)).toBeVisible();
-  await page.getByRole("button", { name: /clear filters/i }).click();
+  await expect(page.getByTestId("list-empty")).toBeVisible();
+  await page.getByTestId("list-empty-clear-filters").click();
   await expect(page).toHaveURL(
     (url) => !url.search.includes("status") && !url.search.includes("keyword"),
   );
@@ -54,7 +54,7 @@ for (const viewport of VIEWPORTS) {
     });
     await page.goto("/");
     await expect(
-      page.locator("text=INV1001").filter({ visible: true }).first(),
+      page.getByTestId("invoice-row-INV1001").filter({ visible: true }).first(),
     ).toBeVisible();
 
     const overflow = await page.evaluate(
@@ -74,7 +74,7 @@ test("shows a loading overlay during a page transition", async ({ page }) => {
 
   await page.goto("/");
   await expect(
-    page.getByText("INV1001").filter({ visible: true }).first(),
+    page.getByTestId("invoice-row-INV1001").filter({ visible: true }).first(),
   ).toBeVisible();
 
   // Delay only the page-2 transition (the later handler takes precedence),
@@ -85,8 +85,8 @@ test("shows a loading overlay during a page transition", async ({ page }) => {
     await route.fulfill({ json: invoicesResponse(10, 41) });
   });
 
-  await page.getByRole("button", { name: "2" }).click();
+  await page.getByTestId("invoices-pagination-page-2").click();
 
-  await expect(page.getByRole("status")).toBeVisible();
-  await expect(page.getByRole("status")).toHaveCount(0);
+  await expect(page.getByTestId("list-loading-overlay")).toBeVisible();
+  await expect(page.getByTestId("list-loading-overlay")).toHaveCount(0);
 });

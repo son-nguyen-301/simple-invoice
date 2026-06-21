@@ -42,9 +42,11 @@ export function InvoiceDetailsSection({
           label="Invoice number"
           required
           error={errors.invoiceNumber}
+          errorTestId="invoice-details-section-invoice-number-error"
         >
           <Input
             id="invoiceNumber"
+            data-testid="invoice-details-section-invoice-number"
             value={form.invoiceNumber}
             onChange={onField("invoiceNumber")}
             placeholder="INV0001"
@@ -56,6 +58,7 @@ export function InvoiceDetailsSection({
         <Field htmlFor="invoiceReference" label="Reference">
           <Input
             id="invoiceReference"
+            data-testid="invoice-details-section-invoice-reference"
             value={form.invoiceReference}
             onChange={onField("invoiceReference")}
             placeholder="#123456"
@@ -68,6 +71,7 @@ export function InvoiceDetailsSection({
             {/* prettier-ignore */}
             <SelectTrigger
               id="currency"
+              data-testid="invoice-details-section-currency"
               className="bg-card data-[size=default]:h-11 w-full rounded-lg"
             >
               <SelectValue />
@@ -87,9 +91,11 @@ export function InvoiceDetailsSection({
           label="Invoice date"
           required
           error={errors.invoiceDate}
+          errorTestId="invoice-details-section-invoice-date-error"
         >
           <Input
             id="invoiceDate"
+            data-testid="invoice-details-section-invoice-date"
             type="date"
             value={form.invoiceDate}
             onChange={onField("invoiceDate")}
@@ -103,9 +109,11 @@ export function InvoiceDetailsSection({
           label="Due date"
           required
           error={errors.dueDate}
+          errorTestId="invoice-details-section-due-date-error"
         >
           <Input
             id="dueDate"
+            data-testid="invoice-details-section-due-date"
             type="date"
             value={form.dueDate}
             onChange={onField("dueDate")}
@@ -121,6 +129,7 @@ export function InvoiceDetailsSection({
         <Field htmlFor="description" label="Description">
           <textarea
             id="description"
+            data-testid="invoice-details-section-description"
             value={form.description}
             onChange={onField("description")}
             placeholder="What is this invoice for?"

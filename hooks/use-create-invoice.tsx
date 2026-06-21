@@ -15,9 +15,14 @@ export function useCreateInvoice() {
     mutationFn: (form: InvoiceFormValues) => createInvoice(form),
     onSuccess: (_data, form) => {
       queryClient.invalidateQueries({ queryKey: ["invoices"] });
-      toast.success("Invoice created", {
-        description: `Invoice ${form.invoiceNumber} was created successfully.`,
-      });
+      toast.success(
+        <span data-testid="use-create-invoice-success-toast">
+          Invoice created
+        </span>,
+        {
+          description: `Invoice ${form.invoiceNumber} was created successfully.`,
+        },
+      );
       router.push("/");
     },
     onError: () => {

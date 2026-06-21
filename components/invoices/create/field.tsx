@@ -6,12 +6,14 @@ export function Field({
   label,
   required,
   error,
+  errorTestId,
   children,
 }: {
   htmlFor: string;
   label: string;
   required?: boolean;
   error?: string;
+  errorTestId?: string;
   children: React.ReactNode;
 }) {
   return (
@@ -24,7 +26,7 @@ export function Field({
         {required ? <span className="text-destructive"> *</span> : null}
       </Label>
       {children}
-      {error ? <ErrorText message={error} /> : null}
+      {error ? <ErrorText message={error} testId={errorTestId} /> : null}
     </div>
   );
 }

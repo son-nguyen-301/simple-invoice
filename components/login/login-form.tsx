@@ -80,6 +80,7 @@ export function LoginForm() {
         </Label>
         <Input
           id="username"
+          data-testid="login-form-username"
           value={username}
           onChange={(e) => {
             setUsername(e.target.value);
@@ -92,7 +93,12 @@ export function LoginForm() {
           aria-invalid={Boolean(fieldErrors.username)}
           className="bg-card h-11 rounded-lg"
         />
-        {fieldErrors.username && <ErrorText message={fieldErrors.username} />}
+        {fieldErrors.username && (
+          <ErrorText
+            message={fieldErrors.username}
+            testId="login-form-username-error"
+          />
+        )}
       </div>
 
       <div className="mt-[18px]">
@@ -104,6 +110,7 @@ export function LoginForm() {
         </Label>
         <Input
           id="password"
+          data-testid="login-form-password"
           type="password"
           value={password}
           onChange={(e) => {
@@ -117,13 +124,19 @@ export function LoginForm() {
           aria-invalid={Boolean(fieldErrors.password)}
           className="bg-card h-11 rounded-lg"
         />
-        {fieldErrors.password && <ErrorText message={fieldErrors.password} />}
+        {fieldErrors.password && (
+          <ErrorText
+            message={fieldErrors.password}
+            testId="login-form-password-error"
+          />
+        )}
       </div>
 
       <div className="mt-4 mb-6 flex items-center justify-between">
         <label className="text-foreground flex cursor-pointer items-center gap-2 text-[13.5px] font-medium">
           <Checkbox
             id="remember"
+            data-testid="login-form-remember"
             checked={remember}
             onCheckedChange={(value) => setRemember(value === true)}
           />
@@ -136,12 +149,13 @@ export function LoginForm() {
 
       {formError && (
         <div className="mb-3">
-          <ErrorText message={formError} />
+          <ErrorText message={formError} testId="login-form-error" />
         </div>
       )}
 
       <Button
         type="submit"
+        data-testid="login-form-submit"
         disabled={isSubmitting}
         className="bg-primary text-primary-foreground shadow-btn hover:bg-primary-hover h-12 w-full rounded-lg text-[15.5px] font-bold"
       >

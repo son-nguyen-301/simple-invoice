@@ -21,5 +21,5 @@ test("authenticated visitor to /login is redirected to /", async ({
 test("unauthenticated visitor can view /login", async ({ page }) => {
   await page.goto("/login");
   await expect(page).toHaveURL(/\/login$/);
-  await expect(page.getByRole("heading", { name: "Sign in" })).toBeVisible();
+  await expect(page.getByTestId("login-page-heading")).toBeVisible();
 });

@@ -30,7 +30,10 @@ export function InvoiceList() {
     <div className="flex-1 px-5 py-7 min-[881px]:px-8">
       <div className="mb-6 flex flex-wrap items-start justify-between gap-4">
         <div>
-          <h1 className="text-foreground text-[26px] font-extrabold tracking-tight">
+          <h1
+            data-testid="invoice-list-heading"
+            className="text-foreground text-[26px] font-extrabold tracking-tight"
+          >
             Invoices
           </h1>
           <p className="text-muted-foreground mt-1 text-sm">{total} invoices</p>

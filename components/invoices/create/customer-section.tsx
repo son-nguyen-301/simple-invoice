@@ -29,9 +29,11 @@ export function CustomerSection({
           label="First name"
           required
           error={errors.firstName}
+          errorTestId="customer-section-first-name-error"
         >
           <Input
             id="firstName"
+            data-testid="customer-section-first-name"
             value={form.firstName}
             onChange={onField("firstName")}
             placeholder="Nguyen"
@@ -45,9 +47,11 @@ export function CustomerSection({
           label="Last name"
           required
           error={errors.lastName}
+          errorTestId="customer-section-last-name-error"
         >
           <Input
             id="lastName"
+            data-testid="customer-section-last-name"
             value={form.lastName}
             onChange={onField("lastName")}
             placeholder="Dung"
@@ -56,9 +60,16 @@ export function CustomerSection({
           />
         </Field>
 
-        <Field htmlFor="email" label="Email" required error={errors.email}>
+        <Field
+          htmlFor="email"
+          label="Email"
+          required
+          error={errors.email}
+          errorTestId="customer-section-email-error"
+        >
           <Input
             id="email"
+            data-testid="customer-section-email"
             type="email"
             value={form.email}
             onChange={onField("email")}
@@ -73,9 +84,11 @@ export function CustomerSection({
           label="Mobile number"
           required
           error={errors.mobile}
+          errorTestId="customer-section-mobile-error"
         >
           <Input
             id="mobile"
+            data-testid="customer-section-mobile"
             value={form.mobile}
             onChange={onField("mobile")}
             placeholder="+6597594971"
@@ -94,6 +107,7 @@ export function CustomerSection({
         <Field htmlFor="premise" label="Premise">
           <Input
             id="premise"
+            data-testid="customer-section-premise"
             value={form.premise}
             onChange={onField("premise")}
             placeholder="CT11"
@@ -104,6 +118,7 @@ export function CustomerSection({
         <Field htmlFor="city" label="City">
           <Input
             id="city"
+            data-testid="customer-section-city"
             value={form.city}
             onChange={onField("city")}
             placeholder="Hanoi"
@@ -114,6 +129,7 @@ export function CustomerSection({
         <Field htmlFor="county" label="County">
           <Input
             id="county"
+            data-testid="customer-section-county"
             value={form.county}
             onChange={onField("county")}
             placeholder="Hoang Mai"
@@ -125,6 +141,7 @@ export function CustomerSection({
           <Field htmlFor="postcode" label="Postcode">
             <Input
               id="postcode"
+              data-testid="customer-section-postcode"
               value={form.postcode}
               onChange={onField("postcode")}
               placeholder="1000"

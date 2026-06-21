@@ -67,6 +67,7 @@ export function InvoiceToolbar({
       <div className="relative w-full min-[881px]:max-w-[360px] min-[881px]:flex-1">
         <Search className="text-subtle-foreground pointer-events-none absolute top-1/2 left-3.5 size-4 -translate-y-1/2" />
         <Input
+          data-testid="invoice-toolbar-search"
           value={text}
           onChange={(event) => setText(event.target.value)}
           placeholder="Search invoice #..."
@@ -75,7 +76,10 @@ export function InvoiceToolbar({
       </div>
       <div className="flex items-center gap-2.5">
         <Select value={status} onValueChange={onStatusChange}>
-          <SelectTrigger className={triggerClass}>
+          <SelectTrigger
+            data-testid="invoice-toolbar-status"
+            className={triggerClass}
+          >
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
@@ -92,7 +96,10 @@ export function InvoiceToolbar({
             onSortChange(value === "oldest" ? "oldest" : "newest")
           }
         >
-          <SelectTrigger className={triggerClass}>
+          <SelectTrigger
+            data-testid="invoice-toolbar-sort"
+            className={triggerClass}
+          >
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
