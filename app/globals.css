@@ -1,0 +1,159 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ---- SimpleInvoice design tokens (light) ---- */
+:root {
+  --radius: 0.625rem; /* 10px - inputs, buttons */
+  --radius-card: 0.875rem; /* 14px - cards */
+  --radius-panel: 1rem; /* 16px - elevated summary panel */
+
+  --background: #f5f6f8;
+  --foreground: #131a26;
+  --card: #ffffff;
+  --card-foreground: #131a26;
+  --popover: #ffffff;
+  --popover-foreground: #131a26;
+
+  --primary: #2563eb;
+  --primary-hover: #1d4ed8;
+  --primary-foreground: #ffffff;
+
+  --secondary: #eef2fb;
+  --secondary-foreground: #2563eb;
+  --accent: #eef2fb;
+  --accent-foreground: #1d4ed8;
+  --muted: #f8f9fb;
+  --muted-foreground: #6a7585;
+  --subtle-foreground: #8b94a3;
+
+  --border: #e8eaef;
+  --border-strong: #e3e6ec;
+  --divider: #f0f1f4;
+  --input: #dfe3ea;
+  --ring: #2563eb;
+
+  --destructive: #e5484d;
+  --destructive-foreground: #ffffff;
+  --destructive-muted: #fef2f2;
+  --destructive-strong: #b91c1c;
+  --success: #15803d;
+  --success-muted: #e9f7ef;
+
+  --status-paid: #15803d;
+  --status-paid-bg: #e9f7ef;
+  --status-pending: #b45309;
+  --status-pending-bg: #fdf3e3;
+  --status-overdue: #b91c1c;
+  --status-overdue-bg: #fdecec;
+  --status-draft: #64748b;
+  --status-draft-bg: #eef1f4;
+
+  --ink: #0e1a2b;
+  --sidebar: #0e1a2b;
+  --sidebar-foreground: #9bb0cc;
+  --sidebar-primary: #2563eb;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: rgba(255, 255, 255, 0.09);
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: rgba(255, 255, 255, 0.07);
+  --sidebar-ring: #3b82f6;
+  --on-ink-muted: #aebfd6;
+  --on-ink-accent: #7fb0ff;
+  --on-ink-pos: #7ee0a8;
+  --on-ink-neg: #ff9b9b;
+
+  --chart-1: #2563eb;
+  --chart-2: #7c3aed;
+  --chart-3: #0d9488;
+  --chart-4: #db2777;
+  --chart-5: #ea580c;
+}
+
+/* ---- Map tokens to Tailwind theme ---- */
+@theme inline {
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+  --font-heading: var(--font-sans);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: var(--radius-card);
+  --radius-2xl: var(--radius-panel);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-hover: var(--primary-hover);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-subtle-foreground: var(--subtle-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-muted: var(--success-muted);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-ink: var(--ink);
+  --color-on-ink-muted: var(--on-ink-muted);
+  --color-on-ink-accent: var(--on-ink-accent);
+  --color-on-ink-pos: var(--on-ink-pos);
+  --color-on-ink-neg: var(--on-ink-neg);
+
+  --color-status-paid: var(--status-paid);
+  --color-status-paid-bg: var(--status-paid-bg);
+  --color-status-pending: var(--status-pending);
+  --color-status-pending-bg: var(--status-pending-bg);
+  --color-status-overdue: var(--status-overdue);
+  --color-status-overdue-bg: var(--status-overdue-bg);
+  --color-status-draft: var(--status-draft);
+  --color-status-draft-bg: var(--status-draft-bg);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --shadow-focus: 0 0 0 3px rgb(37 99 235 / 0.12);
+  --shadow-btn: 0 8px 20px rgb(37 99 235 / 0.28);
+  --shadow-btn-sm: 0 6px 16px rgb(37 99 235 / 0.26);
+  --shadow-panel: 0 12px 32px rgb(14 26 43 / 0.18);
+  --shadow-toast: 0 16px 40px rgb(14 26 43 / 0.18);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/40;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+  .tabular,
+  .font-mono {
+    font-variant-numeric: tabular-nums;
+  }
+}
