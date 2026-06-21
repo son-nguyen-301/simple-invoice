@@ -99,7 +99,7 @@ export function CustomerSection({
       </div>
 
       <div className="bg-border/70 my-5 h-px" />
-      <div className="text-muted-foreground mb-3.5 text-[12px] font-bold tracking-[0.05em] uppercase">
+      <div className="text-muted-foreground mb-3.5 text-[12px] font-bold tracking-wider uppercase">
         Billing address
       </div>
 

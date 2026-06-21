@@ -14,7 +14,7 @@ export function Sidebar() {
   return (
     <aside className="bg-sidebar sticky top-0 hidden h-screen w-[248px] flex-none flex-col text-white min-[881px]:flex">
       <div className="flex items-center gap-2.5 border-b border-white/[0.07] px-5 py-5">
-        <div className="from-primary flex size-[34px] flex-none items-center justify-center rounded-[9px] bg-gradient-to-br to-blue-500">
+        <div className="from-primary flex size-[34px] flex-none items-center justify-center rounded-[9px] bg-linear-to-br to-blue-500">
           <div className="h-4 w-[13px] rounded-[2px] bg-white" />
         </div>
         <span className="text-[17px] font-extrabold tracking-tight">
@@ -55,7 +55,7 @@ export function Sidebar() {
 
       <div className="border-t border-white/[0.07] p-3.5">
         <div className="flex items-center gap-2.5 rounded-lg px-2.5 py-2">
-          <div className="flex size-[34px] flex-none items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-blue-400 text-[13px] font-bold text-white">
+          <div className="flex size-[34px] flex-none items-center justify-center rounded-full bg-linear-to-br from-blue-500 to-blue-400 text-[13px] font-bold text-white">
             SI
           </div>
           <div className="min-w-0 flex-1">

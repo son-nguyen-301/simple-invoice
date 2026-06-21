@@ -9,8 +9,8 @@ const FEATURES = [
 export function BrandPanel() {
   return (
     <aside className="relative hidden w-[46%] flex-col justify-between overflow-hidden bg-[linear-gradient(160deg,#0e1a2b_0%,#13294a_60%,#1d3a6b_100%)] p-14 text-white min-[881px]:flex">
-      <div className="pointer-events-none absolute -top-[120px] -right-[120px] h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle,rgba(59,130,246,.28),transparent_70%)]" />
-      <div className="pointer-events-none absolute -bottom-[100px] -left-[80px] h-[320px] w-[320px] rounded-full bg-[radial-gradient(circle,rgba(37,99,235,.2),transparent_70%)]" />
+      <div className="pointer-events-none absolute top-[-120px] right-[-120px] h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle,rgba(59,130,246,.28),transparent_70%)]" />
+      <div className="pointer-events-none absolute bottom-[-100px] left-[-80px] h-[320px] w-[320px] rounded-full bg-[radial-gradient(circle,rgba(37,99,235,.2),transparent_70%)]" />
 
       <div className="relative flex items-center gap-3">
         <div className="shadow-btn flex h-[38px] w-[38px] items-center justify-center rounded-lg bg-[linear-gradient(135deg,#2563eb,#3b82f6)]">

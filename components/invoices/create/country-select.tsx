@@ -54,7 +54,7 @@ export function CountrySelect({
       </PopoverTrigger>
       <PopoverContent
         align="start"
-        className="w-[var(--radix-popover-trigger-width)] p-0"
+        className="w-(--radix-popover-trigger-width) p-0"
       >
         <Command>
           <CommandInput
