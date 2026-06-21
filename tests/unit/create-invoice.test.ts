@@ -138,15 +138,41 @@ describe("computeErrors", () => {
       "Due date is before invoice date",
     );
   });
+
+  it("rejects a negative tax rate", () => {
+    expect(computeErrors({ ...fullForm, taxRate: "-5" }).taxRate).toBe(
+      "Tax must be between 0 and 100",
+    );
+  });
+
+  it("rejects a tax rate above 100", () => {
+    expect(computeErrors({ ...fullForm, taxRate: "150" }).taxRate).toBe(
+      "Tax must be between 0 and 100",
+    );
+  });
+
+  it("rejects a negative discount", () => {
+    expect(
+      computeErrors({ ...fullForm, discountValue: "-10" }).discountValue,
+    ).toBe("Discount can't be negative");
+  });
+
+  it("rejects a discount that exceeds the subtotal", () => {
+    // subtotal = quantity 2 * rate 1000 = 2000
+    expect(
+      computeErrors({ ...fullForm, discountValue: "2500" }).discountValue,
+    ).toBe("Discount can't exceed the subtotal");
+  });
 });
 
 describe("computeTotals", () => {
-  it("computes subtotal, tax, discount and total", () => {
+  it("computes subtotal, discount and tax on the post-discount amount", () => {
     const totals = computeTotals(fullForm);
 
+    // subtotal 2000, discount 50 -> taxable 1950, tax 10% = 195
     expect(totals.subtotal).toBe(2000);
-    expect(totals.tax).toBe(200);
     expect(totals.discount).toBe(50);
-    expect(totals.total).toBe(2150);
+    expect(totals.tax).toBe(195);
+    expect(totals.total).toBe(2145);
   });
 });

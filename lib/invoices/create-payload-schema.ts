@@ -72,6 +72,37 @@ const invoiceSchema = z
   .refine((data) => data.dueDate >= data.invoiceDate, {
     path: ["dueDate"],
     message: "Due date is before invoice date",
+  })
+  // Tax (percentage) must be 0-100; discount (fixed amount) must be 0-subtotal.
+  .superRefine((data, ctx) => {
+    const subtotal = data.items.reduce(
+      (sum, item) => sum + item.quantity * item.rate,
+      0,
+    );
+
+    for (const extension of data.extensions ?? []) {
+      if (
+        extension.name === "tax" &&
+        (extension.value < 0 || extension.value > 100)
+      ) {
+        ctx.addIssue({
+          code: "custom",
+          path: ["extensions"],
+          message: "Tax must be between 0 and 100",
+        });
+      }
+
+      if (
+        extension.name === "discount" &&
+        (extension.value < 0 || extension.value > subtotal)
+      ) {
+        ctx.addIssue({
+          code: "custom",
+          path: ["extensions"],
+          message: "Discount must be between 0 and the subtotal",
+        });
+      }
+    }
   });
 
 export const createInvoicePayloadSchema = z.object({
