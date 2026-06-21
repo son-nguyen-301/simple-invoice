@@ -49,17 +49,17 @@ export function InvoiceSummary({
             </span>
           </div>
           <div className="flex justify-between text-[13.5px] font-medium">
+            <span className="text-on-ink-muted">Discount</span>
+            <span className="text-on-ink-neg font-mono">
+              - {formatMoney(totals.discount, form.currency)}
+            </span>
+          </div>
+          <div className="flex justify-between text-[13.5px] font-medium">
             <span className="text-on-ink-muted">
               Tax ({parseFloat(form.taxRate) || 0}%)
             </span>
             <span className="text-on-ink-pos font-mono">
               + {formatMoney(totals.tax, form.currency)}
-            </span>
-          </div>
-          <div className="flex justify-between text-[13.5px] font-medium">
-            <span className="text-on-ink-muted">Discount</span>
-            <span className="text-on-ink-neg font-mono">
-              - {formatMoney(totals.discount, form.currency)}
             </span>
           </div>
         </div>

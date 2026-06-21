@@ -107,7 +107,7 @@ export function CreateInvoiceForm() {
             onField={onField}
             totals={totals}
           />
-          <TaxDiscountSection form={form} onField={onField} />
+          <TaxDiscountSection form={form} errors={errors} onField={onField} />
         </div>
 
         <InvoiceSummary

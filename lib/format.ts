@@ -64,9 +64,9 @@ export function avatarColor(name: string): string {
 }
 
 const CURRENCY_SYMBOLS: Record<string, string> = {
-  GBP: "GBP",
+  GBP: "£",
   USD: "$",
-  EUR: "EUR",
+  EUR: "€",
 };
 
 export function currencySymbol(currency: string): string {
